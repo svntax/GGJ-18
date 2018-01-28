@@ -402,6 +402,30 @@ function enemy:damage()
  if(self.hp>0) then
   self.hp-=1
  else
+  for i=1,30 do
+   local p=particle:new()
+   local px=self.x+4
+   local py=self.y+4
+   local p_life=rnd(1)
+   local p_size=flr(rnd(2))+1
+   local p_color=flr(rnd(4))+1
+   if(p_color==1) then
+    p_color=6 --light gray
+   elseif(p_color==2) then
+    p_color=7 --white
+   elseif(p_color==3) then
+    p_color=11 --green
+   elseif(p_color==4) then
+    p_color=3
+   end
+   local p_velx=rnd(2)-1
+   local p_vely=rnd(2)-1
+   p:init(px,py,p_life)
+   p:set_size(p_size,p_size)
+   p:set_color(p_color)
+   p:set_vel(p_velx,p_vely)
+  add(particles,p)
+ end
   del(enemies,self)
   sfx(1)
  end
